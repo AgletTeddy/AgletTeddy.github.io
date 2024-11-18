@@ -1,0 +1,398 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+.roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "CMGSans";
+    src: url("fonts/CMGSans-Regular.ttf");
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "CMGSans";
+    src: url("fonts/CMGSans-Medium.ttf");
+    font-style: normal;
+    font-weight: 500;
+}
+@font-face {
+    font-family: "CMGSans";
+    src: url("fonts/CMGSans-RegularCn.ttf");
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "CMGSans";
+    src: url("fonts/CMGSans-SemiBoldCn.ttf");
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "CMGSans";
+    src: url("fonts/CMGSans-Bold.ttf");
+    font-style: normal;
+    font-weight: 800;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "CMGSans", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: black;
+    color: white;
+    overflow-x: hidden;
+    padding-bottom: 60px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 45vh;
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.intro {
+    width: 100%;
+    max-width: 400px;
+    min-width: 200px;
+}
+
+.top {
+    text-align: center;
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 
+.artist-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+} */
+
+.artist-photo {
+    object-fit: cover;
+    width: auto;
+    height: 100%;
+    position: relative;
+    z-index: -100;
+}
+
+.real-artist-name {
+    width: 100%;
+    text-align: center;
+}
+
+.artist-description {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    font-weight: 800;
+}
+
+.artist-name-desktop {
+    display: none;
+}
+
+.artist-name {
+    z-index: 100;
+    font-size: 30px;
+    bottom: 42px;
+    font-weight: 800;
+    position: absolute;
+    top: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.overlay {
+    position: absolute; /* Position it on top of the image */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0) 40%
+    );
+    pointer-events: none; /* Optional: prevents the overlay from blocking interaction with the image */
+}
+
+.artist-info {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+.artist-info li {
+    margin: 5px 0;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 12px;
+}
+
+.social-icon {
+    font-size: 24px;
+}
+
+/* Bottom Icons */
+.bottom-icons {
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    bottom: 20px;
+    cursor: pointer;
+}
+
+.bottom-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Gallery Section */
+.gallery {
+    padding: 20px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+/* .media-container {
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.media-container .hover-video {
+    opacity: 0;
+    z-index: 5;
+    transition: opacity 0.2 ease-in-out;
+}
+
+.media-container:hover .hover-video {
+    opacity: 1;
+} */
+
+.media-container {
+    cursor: pointer;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+/* Portrait Images */
+.portrait {
+    width: 100%;
+    max-width: 100%; /* Responsive width limit */
+    max-height: 100%; /* Ensure height isn't too large */
+    border-radius: 10px;
+    object-fit: cover; /* Keeps aspect ratio intact */
+}
+
+/* Landscape Images */
+.landscape {
+    grid-column: span 2;
+    width: 100%;
+    max-width: 100%; /* Responsive width limit */
+    max-height: 100%; /* Ensure height isn't too large */
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.underline-bar {
+    margin-top: 8px;
+    width: 100%;
+    height: 5px;
+    background: white;
+    border-radius: 10px;
+    transition: opacity 0.5s cubic-bezier(0, 0, 0.32, 1.27),
+        visibility 0.5s ease;
+}
+
+.hide-underline-bar {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s cubic-bezier(0, 0, 0.32, 1.27),
+        visibility 0.5s ease;
+}
+
+#down-arrow {
+    position: fixed;
+    bottom: 0px;
+    height: 20vh;
+    text-align: center;
+    width: 100%;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    overflow: visible;
+
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0) 100%
+    );
+
+    transition: opacity 0.5s cubic-bezier(0, 0, 0.32, 1.27),
+        visibility 0.5s ease;
+}
+
+.hide-arrow {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s cubic-bezier(0, 0, 0.32, 1.27),
+        visibility 0.5s ease;
+}
+
+#down-arrow img {
+    width: 37px;
+    height: 37px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 700px;
+}
+
+/* Ensure aspect ratio is maintained on mobile */
+img {
+    aspect-ratio: attr(width) / attr(height); /* Adjusts ratio dynamically */
+}
+
+/* Mobile First Design */
+/**
+
+@media (max-width: 768px) {
+    .artist-name {
+        font-size: 28px;
+    }
+
+    .artist-info li {
+    }
+
+    .bottom-icons {
+        align-items: center;
+        gap: 20px;
+        width: 80%;
+    }
+
+    .bottom-icon {
+        justify-content: center;
+    }
+
+    .portrait,
+    .landscape {
+        max-width: 100%;
+        max-height: 90vh; 
+    }
+}
+
+*/
+
+@media (orientation: landscape) {
+    .artist-photo {
+        width: 120px;
+        height: 120px;
+        border: 3px solid white;
+        border-radius: 100%;
+    }
+
+    .artist-name {
+        font-size: 28px;
+        display: none;
+    }
+
+    .artist-name-desktop {
+        width: 100%;
+        text-align: center;
+        font-size: 28px;
+        font-weight: 800;
+        display: block;
+    }
+
+    .gallery {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        width: 80%;
+    }
+
+    .overlay {
+        display: none;
+    }
+
+    .photo-grid {
+        width: 50%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+
+    /*
+    .social-icon {
+        font-size: 24px;
+    }
+
+    .portrait,
+    .landscape {
+        max-width: 100%; 
+        max-height: 80vh; 
+    } */
+}

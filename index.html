@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Teddy - 3D Artist</title>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+    </head>
+    <body>
+        <section class="top">
+            <img
+                src="img/artist-photo-wide.jpeg"
+                alt="Artist Photo"
+                class="artist-photo"
+            />
+            <span class="artist-name">Teddy</span>
+            <div class="overlay"></div>
+        </section>
+        <div class="artist-name-desktop">Teddy</div>
+        <div class="real-artist-name"><span>Eduardo Clemente</span></div>
+
+        <!-- Main Section -->
+        <section class="hero">
+            <div class="intro">
+                <div class="artist-description">
+                    <span>3D Artist</span><span>Video Editor</span>
+                </div>
+
+                <div class="social-icons">
+                    <a href="#" class="social-icon"
+                        ><i class="fab fa-twitter"></i
+                    ></a>
+                    <a href="#" class="social-icon"
+                        ><i class="fab fa-instagram"></i
+                    ></a>
+                    <a href="#" class="social-icon"
+                        ><i class="fab fa-linkedin"></i
+                    ></a>
+                    <a href="#" class="social-icon"
+                        ><i class="fab fa-artstation"></i
+                    ></a>
+                </div>
+            </div>
+
+            <div class="info">
+                <div>
+                    <ul>
+                        <li>
+                            <span class="info-description>">Photoshop</span>
+                        </li>
+                        <li>
+                            <span class="info-description">After Effects</span>
+                        </li>
+                        <li><span class="info-description">Blender</span></li>
+                        <li><span class="info-description">GIMP</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <span class="info-description">Self-Taught</span>
+                        </li>
+                        <li>
+                            <span class="info-description">Perfectionist</span>
+                        </li>
+                        <li><span class="info-description">Whatever</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom-icons">
+                <div>
+                    <span class="bottom-icon" onclick="showAnimations()"
+                        >Animations</span
+                    >
+                    <div
+                        class="underline-bar"
+                        id="underline-bar-animations"
+                    ></div>
+                </div>
+                <div>
+                    <span class="bottom-icon" onclick="showRenders()"
+                        >Renders</span
+                    >
+                    <div
+                        class="underline-bar hide-underline-bar"
+                        id="underline-bar-renders"
+                    ></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery" id="animations-gallery">
+            <div class="photo-grid"></div>
+            <div class="photo-grid"></div>
+        </section>
+        <section class="gallery" id="renders-gallery" style="display: none">
+            <div class="photo-grid"></div>
+            <div class="photo-grid"></div>
+        </section>
+
+        <div id="down-arrow">
+            <img src="img/down-arrow.png" />
+        </div>
+
+        <script>
+            /*
+                Main Script, with transitions, listeners and handlers
+            */
+
+            function scrollToMedia() {
+                const target =
+                    document.getElementsByClassName("bottom-icons")[0];
+                const position =
+                    target.getBoundingClientRect().top + window.scrollY - 30;
+                window.scrollTo({
+                    top: position,
+                    behavior: "smooth",
+                });
+            }
+
+            function showRenders() {
+                document.getElementById("animations-gallery").style.display =
+                    "none";
+                document.getElementById("renders-gallery").style.display =
+                    "flex";
+
+                document
+                    .getElementById("underline-bar-animations")
+                    .classList.add("hide-underline-bar");
+                document
+                    .getElementById("underline-bar-renders")
+                    .classList.remove("hide-underline-bar");
+                scrollToMedia();
+            }
+
+            function showAnimations() {
+                document.getElementById("renders-gallery").style.display =
+                    "none";
+                document.getElementById("animations-gallery").style.display =
+                    "flex";
+
+                document
+                    .getElementById("underline-bar-renders")
+                    .classList.add("hide-underline-bar");
+                document
+                    .getElementById("underline-bar-animations")
+                    .classList.remove("hide-underline-bar");
+
+                scrollToMedia();
+            }
+
+            // Select the clickable div
+            const scrollToTopButton = document.getElementById("down-arrow");
+
+            // Function to check scroll position
+            window.addEventListener("scroll", () => {
+                // If user is scrolled completely to the top, show the button
+                if (window.scrollY === 0) {
+                    scrollToTopButton.classList.remove("hide-arrow");
+                } else {
+                    scrollToTopButton.classList.add("hide-arrow");
+                }
+            });
+
+            // Add click event to scroll to target section
+            scrollToTopButton.addEventListener("click", () => {
+                scrollToMedia();
+            });
+        </script>
+
+        <script>
+            function onOrientationChange(callback) {
+                // Media queries for landscape and portrait
+                const landscapeQuery = window.matchMedia(
+                    "(orientation: landscape)"
+                );
+                const portraitQuery = window.matchMedia(
+                    "(orientation: portrait)"
+                );
+
+                // Function to handle changes
+                function handleOrientationChange() {
+                    if (landscapeQuery.matches) {
+                        callback("landscape");
+                    } else if (portraitQuery.matches) {
+                        callback("portrait");
+                    }
+                }
+
+                // Listen for changes
+                landscapeQuery.addEventListener(
+                    "change",
+                    handleOrientationChange
+                );
+                portraitQuery.addEventListener(
+                    "change",
+                    handleOrientationChange
+                );
+
+                // Initial check to trigger callback on page load
+                handleOrientationChange();
+            }
+
+            document.addEventListener("DOMContentLoaded", async () => {
+                function onCenterChange(callback) {
+                    const elements =
+                        document.querySelectorAll(".media-container");
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                console.log(entry);
+                                if (entry.isIntersecting) {
+                                    callback(entry.target, true);
+                                } else {
+                                    callback(entry.target, false);
+                                }
+                            });
+                        },
+                        {
+                            root: null, // Uses the viewport as the root
+                            rootMargin: "-40% 0% -40% 0%", // Shrinks the top and bottom by 40% of the viewport height
+                            threshold: 0.1, // Adjust for intersection percentage
+                        }
+                    );
+
+                    // Observe each element
+                    elements.forEach((element) => observer.observe(element));
+                }
+
+                const animationsGallery =
+                    document.getElementsByClassName("photo-grid");
+                const rendersGallery =
+                    document.getElementsByClassName("photo-grid");
+
+                try {
+                    // Fetch the contents of the media file
+                    const response = await fetch("media/urls.txt");
+                    const text = await response.text();
+
+                    // Split the file content into lines
+                    const filenames = text
+                        .replace(/\r\n/g, "\n")
+                        .trim()
+                        .split("\n");
+
+                    // Filter and categorize filenames
+                    const animationFiles = filenames.filter((file) =>
+                        file.includes("animation")
+                    );
+                    const renderFiles = filenames.filter((file) =>
+                        file.includes("render")
+                    );
+
+                    const animationFilesRightTable = animationFiles.filter(
+                        (file) => file.includes("_R")
+                    );
+                    const animationFilesLeftTable = animationFiles.filter(
+                        (file) => file.includes("_L")
+                    );
+                    const renderFilesRightTable = renderFiles.filter((file) =>
+                        file.includes("_R")
+                    );
+                    const renderFilesLeftTable = renderFiles.filter((file) =>
+                        file.includes("_L")
+                    );
+
+                    // Helper to process files
+                    const processFiles = (
+                        files,
+                        galleryElement,
+                        viewport_orientation
+                    ) => {
+                        // Parse file details and organize by number
+                        const fileMap = files.reduce((acc, file) => {
+                            const match = file.match(
+                                /_(portrait|landscape)_(\d+)_(R|L)\.(jpg|png)$/
+                            );
+                            const fileSplit = file.split("|");
+                            if (match) {
+                                const [, orientation, number, extension] =
+                                    match;
+                                const id = `${orientation}_${number}`;
+                                // Prevent duplicates based on number ID
+                                if (!acc[id]) {
+                                    acc[id] = {
+                                        file: "media/" + fileSplit[2],
+                                        orientation,
+                                        number:
+                                            viewport_orientation === "landscape"
+                                                ? fileSplit[0].split("-")[1]
+                                                : fileSplit[1].split("-")[1],
+                                    };
+                                }
+                            }
+                            return acc;
+                        }, {});
+
+                        // Sort files by number
+                        const sortedFiles = Object.values(fileMap).sort(
+                            (a, b) => a.number - b.number
+                        );
+
+                        // Generate and append <img> elements
+                        sortedFiles.forEach(({ file, orientation }) => {
+                            // media container containing both the image and the short video
+                            const mediaContainer =
+                                document.createElement("div");
+                            mediaContainer.className =
+                                "media-container " + orientation;
+                            mediaContainer.onclick = () => {
+                                window.open(file, "_blank");
+                            };
+                            galleryElement.appendChild(mediaContainer);
+
+                            // <img> for the thumbnail of the animation
+                            const img = document.createElement("img");
+                            img.src = file;
+                            img.className = orientation; // Add 'portrait' or 'landscape' class
+                            mediaContainer.appendChild(img);
+
+                            // Generate the <video> element for hover effect
+                            const videoFile = file
+                                .replace(".jpg", ".mp4")
+                                .replace(".png", ".mp4"); // Replace the image extension with a video extension
+                            const video = document.createElement("video");
+                            video.src = videoFile; // Use the corresponding video file
+                            video.className = orientation;
+                            video.controls = false;
+                            video.style.display = "none"; // Hide the video by default
+                            video.muted = true; // Required for autoplay in most browsers
+                            video.playsInline = true;
+                            video.autoplay = true;
+                            video.loop = true; // Ensure the video loops
+                            mediaContainer.appendChild(video);
+
+                            // Skip if the gallery is for renders, we dont need videos
+                            if (
+                                galleryElement.parentElement.id ===
+                                "renders-gallery"
+                            )
+                                return;
+
+                            const fullVideoFileURL =
+                                videoFile.split(".")[0] +
+                                "_full." +
+                                videoFile.split(".")[1];
+                            mediaContainer.onclick = () => {
+                                window.open(fullVideoFileURL, "_blank");
+                            };
+
+                            // Add hover behavior to play/pause and restart the video
+                            mediaContainer.addEventListener(
+                                "mouseenter",
+                                () => {
+                                    if (viewport_orientation === "portrait")
+                                        return;
+                                    img.style.display = "none"; // Hide image
+                                    video.style.display = "block"; // Show video
+                                    video.currentTime = 0; // Restart video
+                                    video.play(); // Play video
+                                }
+                            );
+                            mediaContainer.addEventListener(
+                                "mouseleave",
+                                () => {
+                                    if (viewport_orientation === "portrait")
+                                        return;
+                                    img.style.display = "block"; // Show image
+                                    video.style.display = "none"; // Hide video
+                                    video.pause(); // Pause video
+                                }
+                            );
+                        });
+                    };
+
+                    // Populate the galleries
+                    onOrientationChange((orientation) => {
+                        console.log(orientation);
+                        // if landscape, show two photogrids
+                        // if portrait, show one photogrid
+                        if (orientation === "landscape") {
+                            document.getElementsByClassName(
+                                "photo-grid"
+                            )[1].style.display = "grid";
+                            document.getElementsByClassName(
+                                "photo-grid"
+                            )[3].style.display = "grid";
+
+                            processFiles(
+                                animationFilesLeftTable,
+                                animationsGallery[0],
+                                orientation
+                            );
+                            processFiles(
+                                animationFilesRightTable,
+                                animationsGallery[1],
+                                orientation
+                            );
+
+                            processFiles(
+                                renderFilesLeftTable,
+                                rendersGallery[2],
+                                orientation
+                            );
+                            processFiles(
+                                renderFilesRightTable,
+                                rendersGallery[3],
+                                orientation
+                            );
+                        } else {
+                            document.getElementsByClassName(
+                                "photo-grid"
+                            )[1].style.display = "none";
+                            document.getElementsByClassName(
+                                "photo-grid"
+                            )[3].style.display = "none";
+
+                            processFiles(
+                                animationFiles,
+                                animationsGallery[0],
+                                orientation
+                            );
+                            processFiles(
+                                renderFiles,
+                                rendersGallery[2],
+                                orientation
+                            );
+                        }
+                    });
+
+                    if (window.matchMedia("(orientation: portrait)").matches) {
+                        console.log("PORTRAIT");
+                        onCenterChange((element, enable) => {
+                            if (
+                                element.parentElement.parentElement.id ===
+                                "renders-gallery"
+                            )
+                                return;
+
+                            // element is media-container
+                            const img = element.querySelector("img");
+                            const video = element.querySelector("video");
+
+                            if (enable) {
+                                let imgHeight = img.height;
+                                img.style.display = "none";
+                                video.style.display = "block";
+                                video.style.height = imgHeight + "px";
+                                video.currentTime = 0;
+                                video.play();
+                            } else {
+                                img.style.display = "block";
+                                video.style.display = "none";
+                                video.pause();
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error(
+                        "Error loading or processing media files:",
+                        error
+                    );
+                }
+            });
+        </script>
+    </body>
+</html>

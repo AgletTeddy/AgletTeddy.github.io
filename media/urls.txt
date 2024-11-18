@@ -1,0 +1,10 @@
+l-1|p-1|animation_portrait_1_R.jpg
+l-2|p-2|animation_portrait_2_R.jpg
+l-3|p-3|animation_landscape_3_L.jpg
+l-4|p-4|animation_portrait_4_R.png
+l-5|p-5|animation_landscape_5_R.jpg
+l-1|p-1|render_portrait_1_R.jpg
+l-2|p-2|render_portrait_2_L.png
+l-3|p-3|render_landscape_3_R.jpg
+l-4|p-4|render_landscape_4_L.jpg
+l-5|p-5|render_landscape_5_R.jpg
