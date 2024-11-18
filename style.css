@@ -354,6 +354,10 @@ img {
         border-radius: 100%;
     }
 
+    .info {
+        font-size: 15px;
+    }
+
     .bottom-icon {
         font-size: 24px;
     }
