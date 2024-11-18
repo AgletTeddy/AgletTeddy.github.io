@@ -1,20 +1,10 @@
 python3 -m http.server 8080 --bind 127.0.0.1
 
--   dark background with some texture with low opacity
-
-    > > standby
-
 -   what should we do with the bullet points? they seem weird mainly in desktop
 
     > > standby
 
 -   links
-
--   aumentar tamanho titulos
-
--   multi autoplay same row
-
--   mouseover animation different sizes bug
 
 INFO URLS and Files
 
